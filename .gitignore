@@ -1,0 +1,4 @@
+qa-artifacts/
+qa-report.json
+__pycache__/
+.DS_Store
