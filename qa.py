@@ -1,9 +1,10 @@
 from pathlib import Path
 import json
+import os
 from playwright.sync_api import sync_playwright
 
-BASE = "http://127.0.0.1:8766"
-ROOT = Path("/Users/john/Project/business-concept-demos")
+BASE = os.environ.get("DEMO_BASE_URL", "http://127.0.0.1:8766").rstrip("/")
+ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "qa-artifacts"
 OUT.mkdir(exist_ok=True)
 PAGES = [
@@ -89,7 +90,7 @@ for r in results:
     if r["internal_nav_hash"] != "#services": errors.append(f"{r['page']} {r['viewport']}: anchor nav failed")
     if r["console_errors"] or r["page_errors"] or r["failed_requests"]: errors.append(f"{r['page']} {r['viewport']}: browser errors")
 
-report = {"pages_expected": 3, "pages_tested": len(PAGES), "viewports": list(VIEWPORTS), "checks": len(results), "errors": errors, "results": results}
+report = {"base_url": BASE, "pages_expected": 3, "pages_tested": len(PAGES), "viewports": list(VIEWPORTS), "checks": len(results), "errors": errors, "results": results}
 (ROOT / "qa-report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n")
 print(json.dumps({"pages_tested": len(PAGES), "checks": len(results), "errors": errors, "screenshots": [str(OUT / f"{s}-{v}.png") for v in VIEWPORTS for s,_ in PAGES]}, ensure_ascii=False, indent=2))
 raise SystemExit(1 if errors else 0)

@@ -2,6 +2,13 @@
 
 三間台灣攝影品牌的非官方網站概念提案。僅供品牌與 John 評估，未受各品牌委託或背書。
 
+## Live demo
+
+- [入口頁](https://johnhuang316.github.io/business-concept-demos/)
+- [桃園婚紗 MT studio](https://johnhuang316.github.io/business-concept-demos/mt-studio/)
+- [可樂果嬰兒攝影工作室](https://johnhuang316.github.io/business-concept-demos/colaguo-baby/)
+- [沐比專業攝影 Mon bébé Photography](https://johnhuang316.github.io/business-concept-demos/monbebe/)
+
 ## Pages
 
 - `mt-studio/` — 桃園婚紗 MT studio
@@ -19,7 +26,17 @@
 ## Local preview
 
 ```bash
-python3 -m http.server 8765
+python3 -m http.server 8766
 ```
 
-Then open `http://127.0.0.1:8765/`.
+Then open `http://127.0.0.1:8766/`.
+
+## QA
+
+```bash
+# Local server on port 8766
+python3 qa.py
+
+# Deployed GitHub Pages
+DEMO_BASE_URL="https://johnhuang316.github.io/business-concept-demos" python3 qa.py
+```
