@@ -21,7 +21,9 @@
       event.preventDefault();
       const result = form.querySelector('.form-result');
       if (!result) return;
-      result.textContent = '這是概念頁互動示意，資料沒有送出或保存。正式版本可串接品牌指定的 LINE、Email 或預約系統。';
+      result.textContent = form.dataset.resultLang === 'en'
+        ? 'This is a concept interaction. Your information was not sent or stored. A production version could connect to the business’s preferred email, WhatsApp or booking flow.'
+        : '這是概念頁互動示意，資料沒有送出或保存。正式版本可串接品牌指定的 LINE、Email 或預約系統。';
       result.classList.add('show');
       result.setAttribute('role', 'status');
       result.focus?.();

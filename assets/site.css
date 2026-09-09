@@ -44,6 +44,56 @@ body.monbebe {
   --line: rgba(40, 76, 76, .14);
   --shadow: 0 24px 70px rgba(60, 108, 108, .12);
 }
+body.superbling {
+  --page: #0e1316;
+  --surface: #171e23;
+  --ink: #edf7fb;
+  --muted: #9babb3;
+  --accent: #2ec5ff;
+  --accent-soft: #153747;
+  --line: rgba(218, 240, 248, .14);
+  --shadow: 0 24px 70px rgba(0, 0, 0, .34);
+}
+body.dogo {
+  --page: #f8f1e8;
+  --surface: #fffdf8;
+  --ink: #2f3531;
+  --muted: #74766f;
+  --accent: #e36f51;
+  --accent-soft: #f7d5c5;
+  --line: rgba(65, 72, 65, .14);
+  --shadow: 0 24px 70px rgba(91, 72, 49, .13);
+}
+body.shanlin {
+  --page: #f0f3ea;
+  --surface: #fbfcf7;
+  --ink: #29352b;
+  --muted: #6b766b;
+  --accent: #6c8a69;
+  --accent-soft: #dce6d5;
+  --line: rgba(44, 66, 46, .15);
+  --shadow: 0 24px 70px rgba(48, 70, 49, .13);
+}
+body.petfactory {
+  --page: #fff7ed;
+  --surface: #fffdf9;
+  --ink: #263d3b;
+  --muted: #6e7974;
+  --accent: #ef7d57;
+  --accent-soft: #f9d9c9;
+  --line: rgba(48, 75, 72, .14);
+  --shadow: 0 24px 70px rgba(116, 72, 48, .13);
+}
+body.mamas {
+  --page: #edf7f4;
+  --surface: #fffdf8;
+  --ink: #173d3c;
+  --muted: #607a77;
+  --accent: #0c8c88;
+  --accent-soft: #cce9e2;
+  --line: rgba(24, 78, 74, .15);
+  --shadow: 0 24px 70px rgba(21, 83, 79, .13);
+}
 
 img { display: block; max-width: 100%; }
 a { color: inherit; }
@@ -91,6 +141,21 @@ button, a { -webkit-tap-highlight-color: transparent; }
   border-radius: 50%;
   border: 1px solid var(--line);
   background: white;
+}
+.brand-mark {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: #fff;
+  background: var(--accent);
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -.02em;
 }
 .brand-copy { line-height: 1.16; min-width: 0; }
 .brand-copy strong { display: block; font-family: var(--serif); font-size: 18px; }
@@ -189,6 +254,23 @@ h1 {
   box-shadow: 0 8px 26px rgba(0,0,0,.14);
 }
 .hero-stamp img { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; }
+.hero-stamp.text-stamp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+  line-height: 1;
+}
+.hero-stamp.text-stamp strong { color: var(--accent); font-family: var(--serif); font-size: 25px; }
+.hero-stamp.text-stamp span { margin-top: 7px; color: var(--muted); font-size: 8px; font-weight: 800; letter-spacing: .2em; }
+
+.superbling .concept-bar { color: #dff7ff; background: #05080a; }
+.superbling .story-copy { background: #05080a; }
+.superbling .button, .superbling .nav-cta { color: #071318; }
+.superbling .button.secondary { color: var(--ink); }
+.superbling .field input::placeholder, .superbling .field textarea::placeholder { color: #7f9098; }
+.mamas .hero-caption { text-shadow: 0 2px 8px rgba(0,0,0,.7); }
 
 .section { width: min(1160px, calc(100% - 40px)); margin: 0 auto; padding: 108px 0; }
 .section.compact { padding: 76px 0; }
@@ -313,6 +395,7 @@ h2 { margin-bottom: 0; font-family: var(--serif); font-size: clamp(38px, 5vw, 66
   .concept-bar { padding-inline: 12px; font-size: 10px; }
   .nav { width: min(100% - 24px, 1180px); height: 68px; }
   .brand img { width: 42px; height: 42px; }
+  .brand-mark { width: 42px; height: 42px; font-size: 15px; }
   .brand-copy strong { font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 170px; }
   .brand-copy span { display: none; }
   .nav-cta { min-height: 40px; padding: 0 15px; font-size: 12px; }

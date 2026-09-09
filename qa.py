@@ -11,6 +11,11 @@ PAGES = [
     ("mt", "/mt-studio/"),
     ("colaguo", "/colaguo-baby/"),
     ("monbebe", "/monbebe/"),
+    ("superbling", "/superbling/"),
+    ("dogo", "/dogohotel/"),
+    ("shanlin", "/shanlin-spa/"),
+    ("petfactory", "/the-pet-factory/"),
+    ("mamas", "/mamas-chalet/"),
 ]
 VIEWPORTS = {
     "desktop": {"width": 1440, "height": 950},
@@ -53,6 +58,10 @@ with sync_playwright() as p:
             for lazy_image in page.locator("img[loading='lazy']").all():
                 lazy_image.scroll_into_view_if_needed()
                 page.wait_for_timeout(120)
+            page.wait_for_function(
+                "[...document.images].every(i => i.complete && i.naturalWidth > 0)",
+                timeout=5000,
+            )
             after_images = page.evaluate("[...document.images].map(i => ({src:i.getAttribute('src'), complete:i.complete, naturalWidth:i.naturalWidth}))")
             # Trigger the internal navigation independent of viewport visibility;
             # mobile CSS intentionally hides the header's text links.
@@ -86,11 +95,12 @@ for r in results:
     if r["services"] != 6: errors.append(f"{r['page']} {r['viewport']}: service count {r['services']}")
     if not r["all_images_loaded"]: errors.append(f"{r['page']} {r['viewport']}: image load failure")
     if "noindex" not in r["noindex"]: errors.append(f"{r['page']} {r['viewport']}: noindex missing")
-    if not r["form_result_visible"] or "沒有送出或保存" not in r["form_result_text"]: errors.append(f"{r['page']} {r['viewport']}: form demo failed")
+    form_ok = "沒有送出或保存" in r["form_result_text"] or "not sent or stored" in r["form_result_text"]
+    if not r["form_result_visible"] or not form_ok: errors.append(f"{r['page']} {r['viewport']}: form demo failed")
     if r["internal_nav_hash"] != "#services": errors.append(f"{r['page']} {r['viewport']}: anchor nav failed")
     if r["console_errors"] or r["page_errors"] or r["failed_requests"]: errors.append(f"{r['page']} {r['viewport']}: browser errors")
 
-report = {"base_url": BASE, "pages_expected": 3, "pages_tested": len(PAGES), "viewports": list(VIEWPORTS), "checks": len(results), "errors": errors, "results": results}
+report = {"base_url": BASE, "pages_expected": 8, "pages_tested": len(PAGES), "viewports": list(VIEWPORTS), "checks": len(results), "errors": errors, "results": results}
 (ROOT / "qa-report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n")
 print(json.dumps({"pages_tested": len(PAGES), "checks": len(results), "errors": errors, "screenshots": [str(OUT / f"{s}-{v}.png") for v in VIEWPORTS for s,_ in PAGES]}, ensure_ascii=False, indent=2))
 raise SystemExit(1 if errors else 0)
